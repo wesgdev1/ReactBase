@@ -22,11 +22,37 @@ function App() {
       image: "https://i.pravatar.cc/100",
       description: "Me gusta el Diseño",
     },
+
+    {
+      name: "Carlos Perez",
+      rol: "Estudiante",
+      image: "https://i.pravatar.cc/100",
+      description: "Me gusta la Inteligencia Artificial",
+    },
+    {
+      name: "Ana Torres",
+      rol: "Estudiante",
+      image: "https://i.pravatar.cc/100",
+      description: "Me gusta el Desarrollo Móvil",
+    },
+    {
+      name: "Miguel Gomez",
+      rol: "Estudiante",
+      image: "https://i.pravatar.cc/100",
+      description: "Me gusta la Seguridad Informática",
+    },
+    {
+      name: "Sofia Ramirez",
+      rol: "Estudiante",
+      image: "https://i.pravatar.cc/100",
+      description: "Me gusta el Desarrollo Web",
+    },
   ];
 
   return (
     <>
       <h1 className={style.title}>Lista de estudiantes</h1>
+      <hr />
       <section className={style.container}>
         {students.map((student, i) => {
           return (
