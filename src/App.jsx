@@ -1,8 +1,10 @@
 import { Card } from "./components/Card";
 
-import { NabVar } from "./components/NabVar";
-import { BrowserRouter, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Students } from "./pages/Students";
+import { NavBar } from "./components/NavBar";
+import { Bootcamp } from "./pages/Bootcamp";
+import { Profile } from "./pages/Profile";
 
 function App() {
   const students = [
@@ -53,7 +55,13 @@ function App() {
 
   return (
     <>
-      <Students students={students} />
+      <NavBar />
+      {/* <Students students={students} /> */}
+      <Routes>
+        <Route path="/estudiantes" element={<Students students={students} />} />
+        <Route path="/" element={<Bootcamp />} />
+        <Route path="/miperfil" element={<Profile />} />
+      </Routes>
     </>
   );
 }
