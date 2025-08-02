@@ -1,6 +1,8 @@
 import { Card } from "./components/Card";
 
-import style from "./App.module.css";
+import { NabVar } from "./components/NabVar";
+import { BrowserRouter, Routes } from "react-router-dom";
+import { Students } from "./pages/Students";
 
 function App() {
   const students = [
@@ -51,21 +53,7 @@ function App() {
 
   return (
     <>
-      <h1 className={style.title}>Lista de estudiantes</h1>
-      <hr />
-      <section className={style.container}>
-        {students.map((student, i) => {
-          return (
-            <Card
-              key={i}
-              name={student.name}
-              rol={student.rol}
-              image={student.image}
-              description={student.description}
-            />
-          );
-        })}
-      </section>
+      <Students students={students} />
     </>
   );
 }
