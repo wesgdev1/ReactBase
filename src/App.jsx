@@ -61,6 +61,7 @@ function App() {
         <Route path="/estudiantes" element={<Students students={students} />} />
         <Route path="/" element={<Bootcamp />} />
         <Route path="/miperfil" element={<Profile />} />
+        <Route path="*" element={<h1>404 Not Found</h1>} />
       </Routes>
     </>
   );
