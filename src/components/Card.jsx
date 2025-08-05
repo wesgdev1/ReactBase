@@ -1,5 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import style from "./Card.module.css";
+import { useEffect, useState } from "react";
+
+const obtenerDataLocalStorage = () => {
+  const data = localStorage.getItem("count"); // buscamos
+
+  return data ? parseInt(data) : 0;
+};
 
 export const Card = ({ name, rol, image, description }) => {
   // Hook reglas:
@@ -9,6 +16,7 @@ export const Card = ({ name, rol, image, description }) => {
   // 4. Se deben llamar desde componentes de función, no desde funciones normales.
 
   const navigate = useNavigate();
+  const [count, setCount] = useState(obtenerDataLocalStorage());
 
   const handleClick = () => {
     console.log(`Soy el evento click en la tarjeta de ${name}`);
@@ -34,8 +42,34 @@ export const Card = ({ name, rol, image, description }) => {
     }
   };
 
+  const handleSum = () => {
+    console.log("Entre por la suma");
+    // aplico una actualizacion de estado
+    setCount(count + 1);
+    // actualizo mi localStorage
+    // localStorage.setItem("count", count + 1);
+  };
+
+  const handleSubstract = () => {
+    console.log("Entre por la resta");
+    // aplico una actualizacion de estado
+
+    if (count > 0) setCount(count - 1);
+  };
+
+  // Ultima linea
+
+  useEffect(() => {
+    localStorage.setItem("count", count);
+  }, [count]);
+
   return (
     <div className={style.container}>
+      <div>
+        <button onClick={handleSum}>+1</button>
+        <span>{count}</span>
+        <button onClick={handleSubstract}>-1</button>
+      </div>
       <img src={image} alt="photo" className={style.image} />
 
       <h2>{name}</h2>
