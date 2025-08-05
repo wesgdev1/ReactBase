@@ -26,6 +26,14 @@ export const Card = ({ name, rol, image, description }) => {
     console.log(e.target.name, e.target.value);
   };
 
+  const handleExercise = (e) => {
+    console.log("Ejercicio:", e.target.value);
+
+    if (e.target.value.includes("cebolla")) {
+      alert("No me gusta la cebolla");
+    }
+  };
+
   return (
     <div className={style.container}>
       <img src={image} alt="photo" className={style.image} />
@@ -52,6 +60,8 @@ export const Card = ({ name, rol, image, description }) => {
         name="age"
         onChange={handleChange}
       />
+
+      <textarea name="ejercicio" id="" onChange={handleExercise}></textarea>
     </div>
   );
 };
