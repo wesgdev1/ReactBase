@@ -9,6 +9,8 @@ export const NavBar = () => {
         <Link to="/">Inicio</Link>
         <Link to="/estudiantes">Estudiantes</Link>
         <Link to="/miperfil">Mi Perfil</Link>
+
+        <Link to="/tareas">Ver tareas</Link>
       </nav>
     </div>
   );

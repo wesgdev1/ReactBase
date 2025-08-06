@@ -93,7 +93,7 @@ export const Card = ({ name, rol, image, description }) => {
       <h2>{name}</h2>
       {/* Esto es un comentario */}
       <p>{asistio ? "Asistió" : "No asistió"}</p>
-      <button onClick={handleClickAsitencia}>Marcar Asistencia</button>
+      <span onClick={handleClickAsitencia}>{asistio ? "❤️" : "❌"}</span>
       <strong>Rol: {rol}</strong>
       <p>{description}</p>
       <button onClick={handleClick}>Click Me!</button>
