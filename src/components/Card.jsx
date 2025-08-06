@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import style from "./Card.module.css";
 import { useEffect, useState } from "react";
+import { use } from "react";
 
 const obtenerDataLocalStorage = () => {
   const data = localStorage.getItem("count"); // buscamos
@@ -17,6 +18,7 @@ export const Card = ({ name, rol, image, description }) => {
 
   const navigate = useNavigate();
   const [count, setCount] = useState(obtenerDataLocalStorage());
+  const [asistio, setAsistio] = useState(false);
 
   const handleClick = () => {
     console.log(`Soy el evento click en la tarjeta de ${name}`);
@@ -27,7 +29,14 @@ export const Card = ({ name, rol, image, description }) => {
   };
 
   const handleClickDetail = () => {
-    navigate(`/estudiante/${name}`);
+    navigate(`/estudiante/${name}`, {
+      state: {
+        name,
+        rol,
+        image,
+        description,
+      },
+    });
   };
 
   const handleChange = (e) => {
@@ -63,23 +72,34 @@ export const Card = ({ name, rol, image, description }) => {
     localStorage.setItem("count", count);
   }, [count]);
 
+  const handleClickAsitencia = () => {
+    console.log("Asistencia marcada");
+    setAsistio(!asistio);
+  };
+
+  const cambiarEstado = () => {
+    setAsistio(!asistio);
+  };
+
   return (
     <div className={style.container}>
-      <div>
+      Contador
+      <div className={style.counter}>
         <button onClick={handleSum}>+1</button>
         <span>{count}</span>
         <button onClick={handleSubstract}>-1</button>
       </div>
       <img src={image} alt="photo" className={style.image} />
-
       <h2>{name}</h2>
+      {/* Esto es un comentario */}
+      <p>{asistio ? "Asistió" : "No asistió"}</p>
+      <button onClick={handleClickAsitencia}>Marcar Asistencia</button>
       <strong>Rol: {rol}</strong>
       <p>{description}</p>
       <button onClick={handleClick}>Click Me!</button>
       <button onClick={handleClickNavigation}>
         ir a informacion del bootcamp
       </button>
-
       <button onClick={handleClickDetail}>Ver detalle del estudiante</button>
       <hr />
       <input
@@ -94,8 +114,8 @@ export const Card = ({ name, rol, image, description }) => {
         name="age"
         onChange={handleChange}
       />
-
       <textarea name="ejercicio" id="" onChange={handleExercise}></textarea>
+      <ControlHora cambiarEstado={cambiarEstado} />
     </div>
   );
 };

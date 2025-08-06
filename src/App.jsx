@@ -6,6 +6,7 @@ import { NavBar } from "./components/NavBar";
 import { Bootcamp } from "./pages/Bootcamp";
 import { Profile } from "./pages/Profile";
 import { StudentDetail } from "./pages/StudentDetail";
+import { Tareas } from "./components/Simu/Tareas";
 
 function App() {
   const students = [
@@ -62,6 +63,7 @@ function App() {
         <Route path="/estudiantes" element={<Students students={students} />} />
         <Route path="/" element={<Bootcamp />} />
         <Route path="/miperfil" element={<Profile />} />
+        <Route path="/tareas" element={<Tareas />} />
         <Route path="/estudiante/:name" element={<StudentDetail />} />
         <Route path="*" element={<h1>404 Not Found</h1>} />
       </Routes>

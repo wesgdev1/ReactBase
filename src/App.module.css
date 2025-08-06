@@ -11,3 +11,12 @@
   justify-content: center;
   gap: 50px;
 }
+
+button{
+  padding: 7px 20px;
+  background-color: #9ec7f4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
