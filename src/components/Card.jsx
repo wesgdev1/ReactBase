@@ -115,7 +115,6 @@ export const Card = ({ name, rol, image, description }) => {
         onChange={handleChange}
       />
       <textarea name="ejercicio" id="" onChange={handleExercise}></textarea>
-      <ControlHora cambiarEstado={cambiarEstado} />
     </div>
   );
 };
