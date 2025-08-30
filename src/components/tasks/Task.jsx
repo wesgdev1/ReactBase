@@ -41,7 +41,7 @@ export const Task = ({ task, updateTask, deleteTask, updateCompleted }) => {
           <h3>{task.title}</h3>
           <p>Estado: {task.completed ? "Completada" : "Pendiente"}</p>
           {!task.completed && (
-            <button onClick={() => updateCompleted(task.id)}>Terminada</button>
+            <button onClick={() => updateCompleted(task)}>Terminada</button>
           )}
           <button onClick={handleDelete}>Eliminar</button>
           <button onClick={handleModeEdition}>Modo Editar</button>

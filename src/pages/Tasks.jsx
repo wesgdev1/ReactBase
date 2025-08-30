@@ -1,53 +1,94 @@
 import React, { useState } from "react";
 import { Formulario } from "../components/tasks/Formulario";
 import { Task } from "../components/tasks/Task";
+import { useTasks } from "../domain/useTasks";
+import { createTask, deleteTaskapi, updateTask2 } from "../api/tasks";
+import Swal from "sweetalert2";
 
 export const Tasks = () => {
-  // LOGICA GENERAL
+  const { data, loading, error, getTareas } = useTasks();
 
-  // estructyura tarea:
-  //tarea={
-  //   id: 1,
-  //   title: "Tarea 1",
-  //   completed: false, // estado de la tar
-  // }
-
-  const [tasks, setTasks] = useState([]);
-
-  const addTask = (title) => {
-    // creo estrctura de la tarea
+  const addTask = async (title) => {
     const newTask = {
-      id: Date.now(),
       title,
-      completed: false,
-      // Genera un ID único basado en la fecha actual
+      description: title,
+      userId: 1,
     };
+    try {
+      const result = await createTask(newTask);
+      getTareas();
 
-    // spred operator.
-    // setTasks([...tasks, newTask]);
-
-    // notacion con prev
-    setTasks((prev) => [...prev, newTask]);
+      // alerta con  sweet alert
+      Swal.fire({
+        title: "Tarea creada",
+        text: "La tarea se ha creado correctamente",
+        icon: "success",
+      });
+    } catch (error) {
+      //sweet error alert
+      Swal.fire({
+        title: "Error",
+        text: "Ha ocurrido un error al crear la tarea",
+        icon: "error",
+      });
+    }
   };
 
-  const updateTask = (id, title) => {
-    const updatedTasks = tasks.map((task) =>
-      task.id === id ? { ...task, title } : task
-    );
-    // Modifico mi estado actualizado
-    setTasks(updatedTasks);
+  const updateTask = async (id, title) => {
+    try {
+      await updateTask2(id, { title });
+      getTareas();
+
+      Swal.fire({
+        title: "Tarea actualizada ",
+        text: "La tarea se ha creado correctamente",
+        icon: "success",
+      });
+    } catch (error) {
+      Swal.fire({
+        title: "Error",
+        text: "Ha ocurrido un error alactualizar la tarea",
+        icon: "error",
+      });
+    }
   };
 
-  const updateCompleted = (id) => {
-    const updatedTasks = tasks.map((task) =>
-      task.id === id ? { ...task, completed: !task.completed } : task
-    );
-    setTasks(updatedTasks);
+  const updateCompleted = async (task) => {
+    try {
+      await updateTask2(task.id, { completed: !task.completed });
+      getTareas();
+
+      Swal.fire({
+        title: "Tarea actualizada ",
+        text: "La tarea se ha creado correctamente",
+        icon: "success",
+      });
+    } catch (error) {
+      Swal.fire({
+        title: "Error",
+        text: "Ha ocurrido un error alactualizar la tarea",
+        icon: "error",
+      });
+    }
   };
 
-  const deleteTask = (id) => {
-    const updatedTasks = tasks.filter((task) => task.id !== id);
-    setTasks(updatedTasks);
+  const deleteTask = async (id) => {
+    try {
+      await deleteTaskapi(id);
+      getTareas();
+
+      Swal.fire({
+        title: "Tarea eliminada",
+        text: "La tarea se ha eliminado correctamente",
+        icon: "success",
+      });
+    } catch (error) {
+      Swal.fire({
+        title: "Error",
+        text: "Ha ocurrido un error al eliminar la tarea",
+        icon: "error",
+      });
+    }
   };
 
   return (
@@ -57,7 +98,8 @@ export const Tasks = () => {
       <Formulario addTask={addTask} />
       {/* Listar las tareas */}
       <div style={{ display: "flex", flexWrap: "wrap" }}>
-        {tasks.map((task) => {
+        {loading && <p>Cargando tareas...</p>}
+        {data?.map((task) => {
           return (
             <Task
               task={task}

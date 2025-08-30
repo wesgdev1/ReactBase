@@ -8,6 +8,7 @@ import { Profile } from "./pages/Profile";
 import { StudentDetail } from "./pages/StudentDetail";
 import { Tareas } from "./components/Simu/Tareas";
 import { Tasks } from "./pages/Tasks";
+import { Vehicles } from "./pages/Vehicles";
 
 function App() {
   const students = [
@@ -60,8 +61,10 @@ function App() {
     <>
       <NavBar />
       {/* <Students students={students} /> */}
+
       <Routes>
         <Route path="/estudiantes" element={<Students students={students} />} />
+        <Route path="/v" element={<Vehicles />} />
         <Route path="/" element={<Bootcamp />} />
         <Route path="/miperfil" element={<Profile />} />
         <Route path="/tareas" element={<Tasks />} />
